@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env.local' });
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
@@ -6,6 +7,8 @@ import compression from 'compression';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import router from './router';
+
+console.log(process.env);
 
 const app = express();
 
@@ -26,8 +29,7 @@ server.listen(8080, () => {
   console.log('server running on http://localhost:8080/');
 });
 
-const MONGO_URL =
-  'mongodb+srv://hoangtrivo1993:fuckyou5569@cluster0.stzb1we.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URL = process.env.MONGODB_KEY!;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
